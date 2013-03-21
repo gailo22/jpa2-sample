@@ -10,6 +10,9 @@
 		<class>com.gailo22.domain.Department</class>
 		<class>com.gailo22.domain.ParkingSpace</class>
 		<class>com.gailo22.domain.Project</class>
+		<class>com.gailo22.domain.Address</class>
+		<class>com.gailo22.domain.Company</class>
+		<class>com.gailo22.domain.VacationEntry</class>
 		<properties>
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
 			<property name="hibernate.connection.username" value="root" />

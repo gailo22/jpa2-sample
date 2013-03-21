@@ -1,10 +1,11 @@
 package com.gailo22.domain;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 @Entity
 public class Department {
@@ -15,7 +16,8 @@ public class Department {
 	private String name;
 
 	@OneToMany(mappedBy = "department")
-	private Collection<Employee> employees;
+	@OrderBy("name ASC")
+	private List<Employee> employees;
 
 	public int getId() {
 		return this.id;
@@ -33,11 +35,11 @@ public class Department {
 		this.name = name;
 	}
 
-	public Collection<Employee> getEmployees() {
+	public List<Employee> getEmployees() {
 		return this.employees;
 	}
 
-	public void setEmployees(final Collection<Employee> employees) {
+	public void setEmployees(final List<Employee> employees) {
 		this.employees = employees;
 	}
 

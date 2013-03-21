@@ -1,7 +1,14 @@
 package com.gailo22.domain;
 
 import java.util.Collection;
+import java.util.Set;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -35,6 +42,20 @@ public class Employee {
 	@ManyToMany
 	@JoinTable(name = "EMP_PROJ", joinColumns = @JoinColumn(name = "EMP_ID"), inverseJoinColumns = @JoinColumn(name = "PROJ_ID"))
 	private Collection<Project> projects;
+
+	@Embedded
+	@AttributeOverrides({ @AttributeOverride(name = "state", column = @Column(name = "PROVINCE")),
+		@AttributeOverride(name = "zip", column = @Column(name = "POSTAL_CODE")) })
+	private Address address;
+
+	@ElementCollection(targetClass = VacationEntry.class)
+	@CollectionTable(name = "VACATION", joinColumns = @JoinColumn(name = "EMP_ID"))
+	@AttributeOverride(name = "daysTaken", column = @Column(name = "DAYS_ABS"))
+	private Collection vacationBookings;
+
+	@ElementCollection
+	@Column(name = "NICKNAME")
+	private Set<String> nickNames;
 
 	public Employee() {
 	}
@@ -97,6 +118,30 @@ public class Employee {
 
 	public void setProjects(final Collection<Project> projects) {
 		this.projects = projects;
+	}
+
+	public Address getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(final Address address) {
+		this.address = address;
+	}
+
+	public Collection getVacationBookings() {
+		return this.vacationBookings;
+	}
+
+	public void setVacationBookings(final Collection vacationBookings) {
+		this.vacationBookings = vacationBookings;
+	}
+
+	public Set<String> getNickNames() {
+		return this.nickNames;
+	}
+
+	public void setNickNames(final Set<String> nickNames) {
+		this.nickNames = nickNames;
 	}
 
 }
